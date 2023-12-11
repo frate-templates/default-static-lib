@@ -1,0 +1,31 @@
+# CMakeLists.txt
+
+# Set the minimum required CMake version
+cmake_minimum_required({{project_name}} 3.12)
+
+# Project name
+project(
+  {{project_name}}
+  {{%if lang == "cpp"}}LANGUAGES CXX{{%endif%}}
+  {{%if lang == "c"}}LANGUAGES C{{%endif%}}
+)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+{%if lang ==  "cpp"%}}set(CMAKE_CXX_STANDARD {{lang_version}}
+{%else if lang == "c"%}}set(CMAKE_C_STANDARD {{lang_version}}
+{%endif%})
+
+{{ packages("") }}
+
+file(GLOB_RECURSE SOURCE_FILES src/*.{{lang}})
+
+add_library({{project_name}} STATIC ${SOURCE_FILES})
+
+target_include_directories({{project_name}} PUBLIC include)
+
+install(TARGETS {{project_name}} 
+    ARCHIVE DESTINATION lib
+)
+
+install(DIRECTORY include/
+    DESTINATION include
+)
