@@ -1,31 +1,39 @@
-# CMakeLists.txt
+cmake_minimum_required(VERSION {{cmake_version}})
 
-# Set the minimum required CMake version
-cmake_minimum_required({{project_name}} 3.12)
-
-# Project name
+# Set your project name and version
 project(
-  {{project_name}}
-  {{%if lang == "cpp"}}LANGUAGES CXX{{%endif%}}
-  {{%if lang == "c"}}LANGUAGES C{{%endif%}}
-)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-{%if lang ==  "cpp"%}}set(CMAKE_CXX_STANDARD {{lang_version}}
-{%else if lang == "c"%}}set(CMAKE_C_STANDARD {{lang_version}}
-{%endif%})
-
-{{ packages("") }}
-
-file(GLOB_RECURSE SOURCE_FILES src/*.{{lang}})
-
-add_library({{project_name}} STATIC ${SOURCE_FILES})
-
-target_include_directories({{project_name}} PUBLIC include)
-
-install(TARGETS {{project_name}} 
-    ARCHIVE DESTINATION lib
+  YourStaticLibrary
+  VERSION 1.0 
+  DESCRIPTION {{description}}
+  {% if lang == "cpp" %}LANGUAGES CXX
+  {% else if lang =="c"%}LANGUAGES C
+  {% endif %}
 )
 
-install(DIRECTORY include/
-    DESTINATION include
+
+file(GLOB_RECURSE SOURCE_FILES
+    src/*.{{lang}}  
 )
+
+
+set(HEADER_FILES
+  {{include_dir}}/*.hpp
+)
+
+# Create the static library
+add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES})
+
+# Specify include directories for the library
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+
+# Enable C++17 (or another standard if needed)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+
+# Set compiler options, can be adjusted depending on your needs
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
+
+
+# Installation rules
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(FILES ${HEADER_FILES} DESTINATION include)
+
