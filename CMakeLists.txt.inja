@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION {{cmake_version}})
 
 # Set your project name and version
 project(
-  {{ project_name }} 
+  {{ name }} 
   VERSION 1.0 
-  DESCRIPTION {{project_description}}
+  DESCRIPTION {{description}}
   {% if lang == "cpp" %}LANGUAGES CXX
   {% else if lang =="c"%}LANGUAGES C
   {% endif %}

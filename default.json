@@ -34,10 +34,10 @@
     }
   ],
   "keywords": [],
-  "project_description": "",
-  "project_name": "",
-  "project_type": "executable",
-  "project_version": "0.0.1",
+  "description": "",
+  "name": "",
+  "type": "executable",
+  "version": "0.0.1",
   "src_dir": "src",
   "toolchains": [],
   "varibles": {
