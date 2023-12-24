@@ -1,14 +1,23 @@
 {
-  "config_version": "0.1",
-  "authors": [],
+  "version": "0.1",
+  "name": "default-static-library",
+  "description": "Default static library project template",
+  "keywords": [],
   "build_dir": "build",
-  "cmake_version": "3.10",
-  "compiler": "g++",
+  "include_dir": "include",
+  "src_dir": "src",
+  "min_cmake_version": "3.0",
   "dependencies": [],
   "flags": [],
-  "include_dir": "include",
-  "lang": "cpp",
-  "lang_version": "20",
+  "system_libs": [],
+  "supported_compilers": ["g++", "clang++", "clang", "gcc"],
+  "supported_languages": ["cpp", "c"],
+  "supported_language_versions": ["20","17","14","11"],
+  "supported_toolchains": [
+    "x86_64-linux-gnu",
+    "x86_64-apple-darwin",
+    "x86_64-pc-windows-gnu"
+  ],
   "default_mode": "Release",
   "modes": [
     {
@@ -33,34 +42,25 @@
       "name": "Test"
     }
   ],
-  "keywords": [],
-  "description": "",
-  "name": "",
-  "type": "executable",
-  "version": "0.0.1",
-  "src_dir": "src",
-  "toolchains": [],
-  "varibles": {
-    "examplebool" : true,
-    "exampleint" : 1,
-    "examplestr" : "hello",
-    "examplefloat" : 1.0,
-    "examplearray" : [
-      "hello",
-      "world"
-    ],
-    "exampleobject" : {
-      "hello" : "world"
+  "global": {
+    "cpack" : {
+      "name" : "MyProject",
+      "vendor" : "MyCompany",
+      "description" : "MyProject does something",
+      "version" : "1.0.0",
+      "contact" : ""
+    },
+    "cpack_ubuntu" : {
+      "depends" : {}
     }
   },
   "prompts": {
     "example" : {
       "type" : "bool",
-      "default" : "true",
+      "default" : "y",
       "text" : "Do you like frate?",
       "lua_callback" : "do_you_like_frate",
-      "required" : "true"
+      "required" : true
     }
   }
 }
-
